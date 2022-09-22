@@ -111,7 +111,7 @@ def convert_schema(schema_type, data, scrape_all, lang):
         if "Wikidata Id" in d and "Wikipedia Link" in d:
             item["SameAs"] = [
                 d["English Wikipedia Link"].replace('https://en.wikipedia.org',"https://wikipedia.org"),
-                d["English Wikipedia Link"].replace('https://en.wikipedia.org',"http://www.productontology.org/id"),
+                d["English Wikipedia Link"].replace('https://en.wikipedia.org/wiki',"http://www.productontology.org/id"),
                 d.pop("English Wikipedia Link", None),
                 "https://www.wikidata.org/wiki/" + d.pop("Wikidata Id", None)
             ]
