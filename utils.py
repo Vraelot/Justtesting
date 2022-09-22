@@ -112,6 +112,7 @@ def convert_schema(schema_type, data, scrape_all, lang):
             item["SameAs"] = [
                 d["English Wikipedia Link"].replace('https://en.wikipedia.org',"https://wikipedia.org"),
                 d["English Wikipedia Link"].replace('https://en.wikipedia.org/wiki',"http://www.productontology.org/id"),
+                f"https://www.google.com/search?kgmid=/m/{d['Wikidata Id']}",
                 d.pop("English Wikipedia Link", None),
                 "https://www.wikidata.org/wiki/" + d.pop("Wikidata Id", None)
             ]
