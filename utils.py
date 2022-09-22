@@ -113,9 +113,13 @@ def convert_schema(schema_type, data, scrape_all, lang):
                 d.pop("Wikipedia Link", None),
                 "https://www.wikidata.org/wiki/" + d.pop("Wikidata Id", None)
             ]
-        elif "Wikipedia Link" in d:
+        elif "English Wikipedia Link" in d:
             item["SameAs"] = [
-                d.pop("Wikipedia Link", None)
+                d.pop("English Wikipedia Link", None)
+            ]
+        elif "English Wikipedia Link" in d:
+            item["SameAs"] = [
+                d.pop("English Wikipedia Link", None).replace('https://en.wikipedia.org',"https://wikipedia.org")
             ]
         result.append(item)
     return header + json.dumps([{f"{schema_type}": result}], indent=4 * ' ') + footer
