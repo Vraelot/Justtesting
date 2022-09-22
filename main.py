@@ -293,12 +293,13 @@ if 'submit' in st.session_state and ("text_razor" in st.session_state and st.ses
             st.write('### Entities', df)
             theLength = (len(df["English Wikipedia Link"]))
             num = 0
-            while num < theLength:
-                linker = df["English Wikipedia Link"][num]
-                linker2 = df["English Wikipedia Link"][num].replace('https://en.wikipedia.org',"https://wikipedia.org")
-                with st.expander(f"""{df['name'][num]}"""):
-                    st.write(f"""{{"@context": "http://schema.org",\n"@type": "Thing","name": "{df['name'][num]}",\n"description":"{df['description'][num]}",\n"SameAs": ["{linker}","{linker2}", "https://www.wikidata.org/wiki/{df['Wikidata Id'][num]}"]}},""")
-                num = num + 1
+            with st.expander("### Enable Dropdowns"):
+                while num < theLength:
+                    linker = df["English Wikipedia Link"][num]
+                    linker2 = df["English Wikipedia Link"][num].replace('https://en.wikipedia.org',"https://wikipedia.org")
+                    with st.expander(f"""{df['name'][num]}"""):
+                        st.write(f"""{{"@context": "http://schema.org",\n"@type": "Thing","name": "{df['name'][num]}",\n"description":"{df['description'][num]}",\n"SameAs": ["{linker}","{linker2}", "https://www.wikidata.org/wiki/{df['Wikidata Id'][num]}"]}},""")
+                    num = num + 1
             df = df.sort_values('Frequency', ascending=False)
             st.write('### Top 10 Entities by Frequency', df[['name', 'Frequency']].head(10))
         # print(is_url)
@@ -324,13 +325,15 @@ if 'submit' in st.session_state and ("text_razor" in st.session_state and st.ses
             about_download_button = utils.download_button(
                 utils.convert_schema("about", df.loc[df['name'].isin(selected_about_names)].to_json(orient='records'),
                                      scrape_all, st.session_state.lang), 'about-entities.json',
-                'Download About Entities JSON-LD ✨', pickle_it=False)
+                'Download About Entities JSON-LD ( Yes ) ✨', pickle_it=False)
+
+
             if len(df.loc[df['name'].isin(selected_about_names)]) > 0:
                 st.markdown(about_download_button, unsafe_allow_html=True)
             mention_download_button = utils.download_button(utils.convert_schema("mentions", df.loc[
                 df['name'].isin(selected_mention_names)].to_json(orient='records'), scrape_all, st.session_state.lang),
                                                             'mentions-entities.json',
-                                                            'Download Mentions Entities JSON-LD ✨', pickle_it=False)
+                                                            'Download Mentions Entities JSON-LD ( Yes ) ✨', pickle_it=False)
             if len(df.loc[df['name'].isin(selected_mention_names)]) > 0:
                 st.markdown(mention_download_button, unsafe_allow_html=True)
         if "df_razor_topics" in st.session_state and extract_categories_topics:
@@ -430,12 +433,15 @@ if 'submit' in st.session_state and ("google_api" in st.session_state and st.ses
                 utils.convert_schema("about", df.loc[df['name'].isin(selected_about_names)].to_json(orient='records'),
                                      scrape_all, st.session_state.lang), 'about-entities.json',
                 'Download About Entities JSON-LD ( Hi ) ✨', pickle_it=False)
+
             if len(df.loc[df['name'].isin(selected_about_names)]) > 0:
                 st.markdown(about_download_button, unsafe_allow_html=True)
+
             mention_download_button = utils.download_button(utils.convert_schema("mentions", df.loc[
                 df['name'].isin(selected_mention_names)].to_json(orient='records'), scrape_all, st.session_state.lang),
                                                             'mentions-entities.json',
                                                             'Download Mentions Entities JSON-LD ( Hi ) ✨', pickle_it=False)
+
             if len(df.loc[df['name'].isin(selected_mention_names)]) > 0:
                 st.markdown(mention_download_button, unsafe_allow_html=True)
             download_buttons = ""
