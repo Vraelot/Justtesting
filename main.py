@@ -95,7 +95,7 @@ with st.form("my_form"):
     )
     input_type_selectbox = st.sidebar.selectbox(
         "Choose what you want to analyze",
-        ("URL", "Text", "URL vs URL")
+        ("Text", "URL", "URL vs URL")
     )
 
     st.sidebar.info(
