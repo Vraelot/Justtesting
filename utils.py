@@ -101,17 +101,16 @@ def convert_schema(schema_type, data, scrape_all, lang):
     result = []
     for d in data:
         item = {}
-
         item["@context"] = "http://schema.org"
         item["@type"] = "Thing"
         item["name"] = d["name"]
         item["description"] = d["description"]
-        item["SameAs"] = d["English Wikipedia Link"]
         if not scrape_all:
             item["description"] = get_summary_link(d["name"], lang)[0]
 
         if "Wikidata Id" in d and "Wikipedia Link" in d:
             item["SameAs"] = [
+                d("English Wikipedia Link", None),
                 d.pop("English Wikipedia Link", None),
                 "https://www.wikidata.org/wiki/" + d.pop("Wikidata Id", None)
             ]
