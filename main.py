@@ -291,8 +291,8 @@ if 'submit' in st.session_state and ("text_razor" in st.session_state and st.ses
             utils.word_frequency(df, text_input, language_option,
                                  st.session_state.text)  # -----------------------Function call for textrazor-------------
             st.write('### Entities', df)
-       
-            st.write(f"""{{"@context": "http://schema.org",\n"@type": "Thing","name": "{df['name']}",\n"description":"{df['description']}",\n"SameAs": ["{df['Wikidata Id']}","{df['Wikidata Id']}", "https://www.wikidata.org/wiki/{df['Wikidata Id']}"]}}],""")
+
+            st.write(f"""{{"@context": "http://schema.org",\n"@type": "Thing","name": "{df['name'][1]}",\n"description":"{df['description'][1]}",\n"SameAs": ["{df['Wikipedia Link'][1].replace('http://en.wikipedia.org',"https://en.wikipedia.org")}","{df['Wikipedia Link'][1].replace('http://en.wikipedia.org',"https://wikipedia.org")}", "https://www.wikidata.org/wiki/{df['Wikidata Id'][1]}"]}}],""")
             df = df.sort_values('Frequency', ascending=False)
             st.write('### Top 10 Entities by Frequency', df[['name', 'Frequency']].head(10))
         # print(is_url)
