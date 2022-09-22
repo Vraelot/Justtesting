@@ -179,7 +179,7 @@ with st.form("my_form"):
         if api_selectbox == "TextRazor":
             extract_categories_topics = st.checkbox('Extract Categories and Topics')
     scrape_all = st.checkbox(
-        "Scrape ALL the Entities descriptions from Wikipedia. This is a time-consuming task, so grab a coffee if you need all the descriptions in your CSV file. The descriptions of the Entities you select for your 'about' and 'mentions' schema properties will be scraped and present in the corresponding JSON-LD files")
+        "Scrape ALL the Entities descriptions from Wikipedia. This is a time-consuming task, so grab a coffee if you need all the descriptions in your CSV file. The descriptions of the Entities you select for your 'about' and 'mentions' schema properties will be scraped and present in the corresponding JSON-LD files", value=True)
     submitted = st.form_submit_button("Submit")
     if submitted:
         if not text_razor_key and not google_api:
@@ -291,6 +291,7 @@ if 'submit' in st.session_state and ("text_razor" in st.session_state and st.ses
             utils.word_frequency(df, text_input, language_option,
                                  st.session_state.text)  # -----------------------Function call for textrazor-------------
             st.write('### Entities', df)
+            st.write('TESTING')
             df = df.sort_values('Frequency', ascending=False)
             st.write('### Top 10 Entities by Frequency', df[['name', 'Frequency']].head(10))
         # print(is_url)
