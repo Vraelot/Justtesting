@@ -105,22 +105,21 @@ def convert_schema(schema_type, data, scrape_all, lang):
         item["@context"] = "http://schema.org"
         item["@type"] = "Thing"
         item["name"] = d["name"]
+        item["description"] = d["description"]
         if not scrape_all:
             item["description"] = get_summary_link(d["name"], lang)[0]
 
         if "Wikidata Id" in d and "Wikipedia Link" in d:
             item["SameAs"] = [
-                d.pop("Wikipedia Link", None),
+                d.pop("English Wikipedia Link", None),
+                d.pop("English Wikipedia Link", None).replace('https://en.wikipedia.org',"https://wikipedia.org"),
                 "https://www.wikidata.org/wiki/" + d.pop("Wikidata Id", None)
             ]
-        elif "English Wikipedia Link" in d:
+        elif "Wikipedia Link" in d:
             item["SameAs"] = [
-                d.pop("English Wikipedia Link", None)
+                d.pop("Wikipedia Link", None)
             ]
-        elif "English Wikipedia Link" in d:
-            item["SameAs"] = [
-                d.pop("English Wikipedia Link", None).replace('https://en.wikipedia.org',"https://wikipedia.org")
-            ]
+        
         result.append(item)
     return header + json.dumps([{f"{schema_type}": result}], indent=4 * ' ') + footer
 
