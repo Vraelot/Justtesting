@@ -291,7 +291,7 @@ if 'submit' in st.session_state and ("text_razor" in st.session_state and st.ses
             utils.word_frequency(df, text_input, language_option,
                                  st.session_state.text)  # -----------------------Function call for textrazor-------------
             st.write('### Entities', df)
-            theLength = (len(df["name"]))
+            theLength = (len(df["English Wikipedia Link"]))
             num = 1
             while num < theLength:
                 linker = df["English Wikipedia Link"][num].replace('http://en.wikipedia.org',"https://en.wikipedia.org")
