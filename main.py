@@ -429,13 +429,13 @@ if 'submit' in st.session_state and ("google_api" in st.session_state and st.ses
             about_download_button = utils.download_button(
                 utils.convert_schema("about", df.loc[df['name'].isin(selected_about_names)].to_json(orient='records'),
                                      scrape_all, st.session_state.lang), 'about-entities.json',
-                'Download About Entities JSON-LD ✨', pickle_it=False)
+                'Download About Entities JSON-LD ( Hi ) ✨', pickle_it=False)
             if len(df.loc[df['name'].isin(selected_about_names)]) > 0:
                 st.markdown(about_download_button, unsafe_allow_html=True)
             mention_download_button = utils.download_button(utils.convert_schema("mentions", df.loc[
                 df['name'].isin(selected_mention_names)].to_json(orient='records'), scrape_all, st.session_state.lang),
                                                             'mentions-entities.json',
-                                                            'Download Mentions Entities JSON-LD ✨', pickle_it=False)
+                                                            'Download Mentions Entities JSON-LD ( Hi ) ✨', pickle_it=False)
             if len(df.loc[df['name'].isin(selected_mention_names)]) > 0:
                 st.markdown(mention_download_button, unsafe_allow_html=True)
             download_buttons = ""
