@@ -294,9 +294,10 @@ if 'submit' in st.session_state and ("text_razor" in st.session_state and st.ses
             theLength = (len(df["English Wikipedia Link"]))
             num = 1
             while num < theLength:
-                linker = df["English Wikipedia Link"][num].replace('http://en.wikipedia.org',"https://en.wikipedia.org")
-                linker2 = df["English Wikipedia Link"][num].replace('http://en.wikipedia.org',"https://wikipedia.org")
-                st.write(f"""{{"@context": "http://schema.org",\n"@type": "Thing","name": "{df['name'][1]}",\n"description":"{df['description'][1]}",\n"SameAs": ["{linker}","{linker2}", "https://www.wikidata.org/wiki/{df['Wikidata Id'][1]}"]}}],""")
+                linker = df["English Wikipedia Link"][num]
+                linker2 = df["English Wikipedia Link"][num].replace('https://en.wikipedia.org',"https://wikipedia.org")
+                with st.expander(f"""{df['name'][num]}"""):
+                    st.write(f"""{{"@context": "http://schema.org",\n"@type": "Thing","name": "{df['name'][num]}",\n"description":"{df['description'][num]}",\n"SameAs": ["{linker}","{linker2}", "https://www.wikidata.org/wiki/{df['Wikidata Id'][num]}"]}},""")
                 num = num + 1
             df = df.sort_values('Frequency', ascending=False)
             st.write('### Top 10 Entities by Frequency', df[['name', 'Frequency']].head(10))
