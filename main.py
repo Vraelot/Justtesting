@@ -292,7 +292,7 @@ if 'submit' in st.session_state and ("text_razor" in st.session_state and st.ses
                                  st.session_state.text)  # -----------------------Function call for textrazor-------------
             st.write('### Entities', df)
             theLength = (len(df["English Wikipedia Link"]))
-            num = 1
+            num = 0
             while num < theLength:
                 linker = df["English Wikipedia Link"][num]
                 linker2 = df["English Wikipedia Link"][num].replace('https://en.wikipedia.org',"https://wikipedia.org")
