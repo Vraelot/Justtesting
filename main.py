@@ -69,13 +69,7 @@ if "it_nlp" not in st.session_state:
 #         st_lottie(st.session_state.anim, width=280, height=230, loop=False, key="anim_makoto")
 # # # logo()
 
-st.markdown(
-    "###### [![this is an image link](https://studiomakoto.it/wp-content/uploads/2021/08/header-logo.webp)](https://studiomakoto.it/?utm_source=streamlit&utm_medium=app&utm_campaign=Entities-swissknife)"
-)
 
-st.markdown(
-    "###### Made in [![this is an image link](https://i.imgur.com/iIOA6kU.png)](https://www.streamlit.io/) with ❤️ by [@maxgeraci1](https://studiomakoto.it/makoto_member/massimiliano-geraci/) | [![Twitter Follow](https://img.shields.io/twitter/follow/maxgeraci1?style=social)](https://twitter.com/maxgeraci1) | [![this is an image link](https://i.imgur.com/thJhzOO.png)](https://www.buymeacoffee.com/MaxG.SEO)"
-)
 
 
 @st.cache(allow_output_mutation=True)
@@ -118,47 +112,11 @@ with st.form("my_form"):
 
     # st.title('Lotti')
 
-    with st.expander("ℹ️ - About this app "):
-        st.markdown(
-            """  
-
-This app, devoted to ✍️[Semantic Publishing](https://en.wikipedia.org/wiki/Semantic_publishing)✍️, relies on:
--   [Text Razor API](https://www.textrazor.com/) for Named-Entity Recognition ([NER](https://en.wikipedia.org/wiki/Named-entity_recognition)) and Linking ([NEL](https://en.wikipedia.org/wiki/Entity_linking));
--   [Google NLP API](https://cloud.google.com/natural-language) for NER and NEL;
--   Wikipedia API for scraping entities description;
--   For everything else, the beauty and power of 🐍Python🐍 and Steamlit.
-
-            """
-        )
-
-    with st.expander("✍️ - Semantic Publishing "):
-        st.write(
-            """  
-
-The Entities Swissknife (TES) is a 100% 🐍Python🐍 app for Semantic publishing, i.e., publishing information on the web as documents accompanied by semantic markup (using the [schema.org](https://schema.org) vocabulary in JSON-LD format). Semantic publication provides a way for machines to understand the structure and meaning of the published information, making information search and data integration more efficient.
-Semantic publishing relies on Structured Data adoption and Entity Linking (Wikification). Named entities are then injected into the JSON-LD markup to make the Content Topics explicit and 🥰Search engines friendly🥰: declare the main topic with the '[about](https://schema.org/about)' property and the secondary topics with the '[mentions](https://schema.org/mentions)' property).
-The 'about' property should refer to 1-2 entities/topics at most, and these entities should be present in your H1 title. The 'mentions' properties should be no more than 3-5 depending on the article's length; as a general rule, an entities/topics should be explicitly mentioned in your schema markup if there is at least one paragraph dedicated to them (and they are possibly present in the relative headline).
-The table with the "Top Entities by Frequency" takes into account for the Frequency count also the normalized entities and not only the exact word with which the entities are present in the text.
-
-            """
-        )
-
-    with st.expander("🔎 - How TES can support your Semantic SEO tasks "):
-        st.write(
-            """  
-
--   Know how NLU (Natural Language Understanding) algorithms “understand” your text to optimize it until the topics which are more relevant to you have the best relevance/salience score;
--   Analyze your SERP competitor’s main topics to discover possible topical gaps in your content;
--   Generate the JSON-LD markup (and inject it into your page schema) to explicit which topics your page is about to search engines. Declare your main topic with the 'about' property. Use the 'mentions' property to declare your secondary topics. This is helpful for disambiguation purposes too;
--   Analyze short texts such as a copy for an ad or a bio/description for an About-page (i.e., the [Entity Home](https://kalicube.com/faq/brand-serps/entity-home-in-seo-explainer/)).
-           """
-        )
-
     if api_selectbox == "TextRazor":
         google_api = None
         st.session_state.google_api = False
         if not author_textrazor_token:
-            text_razor_key = st.text_input('Please enter a valid TextRazor API Key (Required)')
+            text_razor_key = st.text_input('Please enter a valid TextRazor API Key (Required)', value="3c816b4452eb1be8f95fad3776f8fe556109e96ac04f576f2b28e00a")
         else:
             text_razor_key = author_textrazor_token
     elif api_selectbox == "Google NLP":
@@ -173,7 +131,7 @@ The table with the "Top Entities by Frequency" takes into account for the Freque
             # print(google_api)
 
     if input_type_selectbox == "URL":
-        text_input = st.text_input('Please enter a URL', placeholder='https://gofishdigital.com/what-is-semantic-seo/')
+        text_input = st.text_input('Please enter a URL', value="https://gofishdigital.com/what-is-semantic-seo/")
         # print('text_input 171 the first lien\n',text_input)
 
         meta_tags_only = st.checkbox('Extract Entities only from meta tags (tag_title, meta_description & H1-4)')
